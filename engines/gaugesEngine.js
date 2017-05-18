@@ -32,6 +32,7 @@ MySQLBackendGaugesEngine.prototype.buildQuerries = function(gauges, time_stamp) 
           // If it is different, we insert a new line.
           // If gaugeName does not exist in the table, we insert a new line
           // The -678 value, is totally arbitrary, I just assumed that there was never gonna be a gauge with a -678 value. You can change it to any value not used by your gauges ;)
+	console.log("Data: "+time_stamp+",'"+gaugeName+"',"+gaugeValue);
 	querries.push("INSERT INTO `gauges_statistics` (`timestamp`, `name`, `value`) VALUES ("+time_stamp+", '"+gaugeName+"', "+gaugeValue+");");
         // querries.push("insert into `gauges_statistics` select "+time_stamp+", '"+gaugeName+"', "+gaugeValue+" from dual where (select if(max(value),max(value),-678) from `gauges_statistics` where name = '"+gaugeName+"') = -678 OR (select value from `gauges_statistics` where name = '"+gaugeName+"' order by timestamp desc limit 0,1) <> "+gaugeValue+";")
 
